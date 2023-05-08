@@ -88,8 +88,8 @@
       </form>
 
       <p class="mt-10 text-center text-sm text-gray-500">
-        Not a member?
-        <a href="/signout" class="font-semibold leading-6 text-indigo-600 hover:text-indigo-500"
+        이미 회원이세요?
+        <a href="/signin" class="font-semibold leading-6 text-indigo-600 hover:text-indigo-500"
           >Get started</a
         >
       </p>
