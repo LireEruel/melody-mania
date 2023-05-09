@@ -1,12 +1,13 @@
 <script setup lang="ts">
 import { ref } from 'vue'
 import { signup } from '@/api/user/api_user'
+import Swal from 'sweetalert2'
 const input_email = ref('1@1')
 const input_password = ref('3')
 const input_password_confirm = ref('3')
 const input_name = ref('4')
 
-const onClickSignUpBtn = async (e: Event) => {
+const onClickSignUpBtn = async () => {
   if (
     input_name.value &&
     input_password.value &&
@@ -14,15 +15,34 @@ const onClickSignUpBtn = async (e: Event) => {
     input_email.value &&
     input_password.value == input_password_confirm.value
   ) {
-    e.preventDefault()
     try {
-      const res = await signup(input_email.value, input_name.value, input_password.value)
-      console.log(res)
-    } catch (e) {
-      console.error(e)
+      await signup(input_email.value, input_name.value, input_password.value)
+      Swal.fire({
+        title: 'Success',
+        text: '회원가입을 완료하였습니다.',
+        icon: 'success',
+        confirmButtonText: '확인',
+        heightAuto: false
+      }).then(() => {
+        window.location.replace('/signin')
+      })
+    } catch (e: any) {
+      Swal.fire({
+        title: 'Error!',
+        text: e.response.data.detail,
+        icon: 'error',
+        confirmButtonText: '확인',
+        heightAuto: false
+      })
     }
   } else {
-    // input 값 잘못 되었다는 경고 띄우기
+    Swal.fire({
+      title: 'Error!',
+      text: '입력 값을 다시 확인해주세요',
+      icon: 'error',
+      confirmButtonText: '확인',
+      heightAuto: false
+    })
   }
 }
 </script>
@@ -41,7 +61,7 @@ const onClickSignUpBtn = async (e: Event) => {
     </div>
 
     <div class="mt-10 sm:mx-auto sm:w-full sm:max-w-sm">
-      <form class="space-y-6" @submit="onClickSignUpBtn">
+      <form class="space-y-6" @submit.prevent="onClickSignUpBtn">
         <div>
           <label for="email" class="block text-sm font-medium leading-6 text-gray-900"
             >Email address</label

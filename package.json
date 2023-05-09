@@ -14,9 +14,12 @@
     "format": "prettier --write src/"
   },
   "dependencies": {
+    "ant-design-vue": "^3.2.20",
     "axios": "^1.4.0",
     "firebase": "^9.21.0",
     "pinia": "^2.0.35",
+    "sweetalert2": "^11.7.5",
+    "unplugin-vue-components": "^0.24.1",
     "vue": "^3.2.47",
     "vue-router": "^4.1.6",
     "yarn": "^1.22.19"
