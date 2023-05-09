@@ -1,7 +1,7 @@
 import { createRouter, createWebHistory } from 'vue-router'
 import HomeView from '../views/HomeView.vue'
 import SignInView from '../views/Auth/SignInView.vue'
-import SignOutView from '../views/Auth/SignOutView.vue'
+import SignUpView from '../views/Auth/SignUpView.vue'
 
 const router = createRouter({
   history: createWebHistory(import.meta.env.BASE_URL),
@@ -17,15 +17,15 @@ const router = createRouter({
       component: SignInView
     },
     {
-      path: '/signout',
-      name: 'signout',
-      component: SignOutView
+      path: '/signup',
+      name: 'signup',
+      component: SignUpView
     }
   ]
 })
 router.beforeEach((to, from, next) => {
   const isAuthenticated = false // 로그인 상태 체크 로직
-  if (!isAuthenticated && to.name !== 'signin' && to.name !== 'signout') {
+  if (!isAuthenticated && to.name !== 'signin' && to.name !== 'signup') {
     next({ name: 'signin' }) // 로그인하지 않은 상태에서 모든 라우팅을 SignIn으로 리다이렉트
   } else {
     next()
