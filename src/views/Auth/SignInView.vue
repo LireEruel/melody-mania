@@ -1,3 +1,49 @@
+<script lang="ts" setup>
+import { login } from '@/api/auth/auth'
+import Swal from 'sweetalert2'
+import { ref } from 'vue'
+
+const input_email = ref('')
+const input_password = ref('')
+
+const onClickSignInBtn = async () => {
+  if (input_email.value && input_password.value) {
+    try {
+      const res = await login(input_email.value, input_password.value)
+      const access_token = res.data.access_token
+      if (access_token) {
+        localStorage.setItem('access_token', access_token)
+      }
+      Swal.fire({
+        title: 'Success',
+        text: '로그인을 완료하였습니다.',
+        icon: 'success',
+        confirmButtonText: '확인',
+        heightAuto: false
+      }).then(() => {
+        window.location.replace('/home')
+      })
+    } catch (e: any) {
+      Swal.fire({
+        title: 'Error!',
+        text: e.response.data.detail,
+        icon: 'error',
+        confirmButtonText: '확인',
+        heightAuto: false
+      })
+    }
+  } else {
+    Swal.fire({
+      title: 'Error!',
+      text: '입력 값을 다시 확인해주세요',
+      icon: 'error',
+      confirmButtonText: '확인',
+      heightAuto: false
+    })
+  }
+}
+</script>
+
 <template>
   <div class="flex min-h-full flex-col justify-center px-6 py-12 lg:px-8">
     <div class="sm:mx-auto sm:w-full sm:max-w-sm">
@@ -12,7 +58,7 @@
     </div>
 
     <div class="mt-10 sm:mx-auto sm:w-full sm:max-w-sm">
-      <form class="space-y-6" action="#" method="POST">
+      <form class="space-y-6" @submit.prevent="onClickSignInBtn">
         <div>
           <label for="email" class="block text-sm font-medium leading-6 text-gray-900"
             >Email address</label
@@ -24,6 +70,7 @@
               type="email"
               autocomplete="email"
               required
+              v-model="input_email"
               class="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
             />
           </div>
@@ -47,6 +94,7 @@
               type="password"
               autocomplete="current-password"
               required
+              v-model="input_password"
               class="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
             />
           </div>

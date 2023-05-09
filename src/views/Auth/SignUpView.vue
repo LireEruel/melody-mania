@@ -2,10 +2,10 @@
 import { ref } from 'vue'
 import { signup } from '@/api/user/api_user'
 import Swal from 'sweetalert2'
-const input_email = ref('1@1')
-const input_password = ref('3')
-const input_password_confirm = ref('3')
-const input_name = ref('4')
+const input_email = ref('')
+const input_password = ref('')
+const input_password_confirm = ref('')
+const input_name = ref('')
 
 const onClickSignUpBtn = async () => {
   if (

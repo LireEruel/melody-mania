@@ -24,7 +24,7 @@ const router = createRouter({
   ]
 })
 router.beforeEach((to, from, next) => {
-  const isAuthenticated = false // 로그인 상태 체크 로직
+  const isAuthenticated = localStorage.getItem('access_token') // 로그인 상태 체크 로직
   if (!isAuthenticated && to.name !== 'signin' && to.name !== 'signup') {
     next({ name: 'signin' }) // 로그인하지 않은 상태에서 모든 라우팅을 SignIn으로 리다이렉트
   } else {
