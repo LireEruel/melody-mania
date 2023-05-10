@@ -1,19 +1,20 @@
 <script lang="ts" setup>
 import { login } from '@/api/auth/auth'
+import { useUserStore } from '@/stores/user'
 import Swal from 'sweetalert2'
 import { ref } from 'vue'
 
 const input_email = ref('')
 const input_password = ref('')
-
+const userStore = useUserStore()
+console.log(userStore.user_info)
 const onClickSignInBtn = async () => {
   if (input_email.value && input_password.value) {
     try {
       const res = await login(input_email.value, input_password.value)
-      const access_token = res.data.access_token
-      if (access_token) {
-        localStorage.setItem('access_token', access_token)
-      }
+      const user_info = res.data.user_info
+      userStore.user_info = user_info
+      console.log(userStore.user_info)
       Swal.fire({
         title: 'Success',
         text: '로그인을 완료하였습니다.',
