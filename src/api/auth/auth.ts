@@ -1,7 +1,9 @@
 import axios from '@/lib/commonAxios'
 import type { UserLoginInfo } from '@/types/user'
 
-const server = 'http://localhost:8000'
+const server = 'http://vdophgzesl.us14.qoddiapp.com'
+
+//const server = 'http://localhost:8000'
 
 async function login(email: string, password: string) {
   const params = {} as UserLoginInfo

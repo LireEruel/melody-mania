@@ -1,10 +1,13 @@
 
 
 ###/user
-POST http://localhost:8000/user
+POST http://vdophgzesl.us14.qoddiapp.com/user
 
 {
-    "email":"1@1",
-    "name": "4",
+    "email":"1123@3121",
+    "name": "124",
     "password":"3"
 }
+
+###/user
+GET http://vdophgzesl.us14.qoddiapp.com/user
