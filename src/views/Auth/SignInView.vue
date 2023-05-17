@@ -3,6 +3,7 @@ import { login } from '@/api/auth/auth'
 import { useUserStore } from '@/stores/user'
 import Swal from 'sweetalert2'
 import { ref } from 'vue'
+import { connect } from '@/socket/socket'
 
 const input_email = ref('')
 const input_password = ref('')
@@ -14,15 +15,25 @@ const onClickSignInBtn = async () => {
       const res = await login(input_email.value, input_password.value)
       const user_info = res.data.user_info
       userStore.user_info = user_info
-      console.log(userStore.user_info)
       Swal.fire({
         title: 'Success',
         text: '로그인을 완료하였습니다.',
         icon: 'success',
         confirmButtonText: '확인',
         heightAuto: false
-      }).then(() => {
-        window.location.replace('/home')
+      }).then(async () => {
+        if (userStore?.user_info?._id) {
+          await connect(userStore.user_info._id)
+          window.location.replace('/home')
+        } else {
+          Swal.fire({
+            title: 'Error!',
+            text: '서버에 연결할 수 없습니다. 다시 시도해주세요.',
+            icon: 'error',
+            confirmButtonText: '확인',
+            heightAuto: false
+          })
+        }
       })
     } catch (e: any) {
       Swal.fire({
