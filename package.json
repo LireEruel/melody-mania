@@ -14,6 +14,8 @@
     "format": "prettier --write src/"
   },
   "dependencies": {
+    "@cloudinary/url-gen": "^1.10.0",
+    "@cloudinary/vue": "^1.11.2",
     "ant-design-vue": "^3.2.20",
     "axios": "^1.4.0",
     "firebase": "^9.21.0",
