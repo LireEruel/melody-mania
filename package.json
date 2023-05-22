@@ -14,7 +14,17 @@
     "format": "prettier --write src/"
   },
   "dependencies": {
+    "@cloudinary/url-gen": "^1.10.0",
+    "@cloudinary/vue": "^1.11.2",
+    "ant-design-vue": "^3.2.20",
+    "axios": "^1.4.0",
+    "firebase": "^9.21.0",
     "pinia": "^2.0.35",
+    "pinia-plugin-persist": "^1.0.0",
+    "pinia-plugin-persistedstate": "^3.1.0",
+    "socket.io-client": "^4.6.1",
+    "sweetalert2": "^11.7.5",
+    "unplugin-vue-components": "^0.24.1",
     "vue": "^3.2.47",
     "vue-router": "^4.1.6",
     "yarn": "^1.22.19"

@@ -1,0 +1,13 @@
+
+
+###/user
+POST http://vdophgzesl.us14.qoddiapp.com/user
+
+{
+    "email":"1123@3121",
+    "name": "124",
+    "password":"3"
+}
+
+###/user
+GET http://vdophgzesl.us14.qoddiapp.com/user
