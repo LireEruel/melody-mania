@@ -11,6 +11,7 @@ declare module '@vue/runtime-core' {
   export interface GlobalComponents {
     AboutView: typeof import('./src/views/AboutView.vue')['default']
     AButton: typeof import('ant-design-vue/es')['Button']
+    AInputSearch: typeof import('ant-design-vue/es')['InputSearch']
     App: typeof import('./src/App.vue')['default']
     HelloWorld: typeof import('./src/components/HelloWorld.vue')['default']
     HomeView: typeof import('./src/views/HomeView.vue')['default']
