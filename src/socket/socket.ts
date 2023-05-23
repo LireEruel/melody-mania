@@ -6,7 +6,7 @@ export const socket_state = reactive({
 })
 
 // "undefined" means the URL will be computed from the `window.location` object
-let URL = 'ws://http://localhost:8000/'
+let URL = 'ws://http://vdophgzesl.us14.qoddiapp.com'
 
 let socket: undefined | WebSocket
 
