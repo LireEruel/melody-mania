@@ -36,7 +36,7 @@ router.beforeEach((to, from, next) => {
   if (!isAuthenticated && to.path !== '/signin' && to.path !== '/signup') {
     next({ name: 'signin' }) // 로그인하지 않은 상태에서 모든 라우팅을 SignIn으로 리다이렉트
   } else {
-    if (to.path == '/home') {
+    if (to.path == '/') {
       next({ name: 'rooms' })
     } else next()
   }

@@ -1,3 +1,7 @@
+<script lang="ts" setup>
+import { SyncOutlined } from '@ant-design/icons-vue'
+</script>
+
 <template>
   <div>
     <h3>방</h3>
