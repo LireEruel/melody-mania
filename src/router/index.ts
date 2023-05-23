@@ -33,10 +33,12 @@ router.beforeEach((to, from, next) => {
   const userStore = useUserStore()
   const isAuthenticated = userStore.user_info?.access_token // 로그인 상태 체크 로직
   //console.log(userStore.user_info)
-  if (!isAuthenticated && to.name !== 'signin' && to.name !== 'signup') {
+  if (!isAuthenticated && to.path !== '/signin' && to.path !== '/signup') {
     next({ name: 'signin' }) // 로그인하지 않은 상태에서 모든 라우팅을 SignIn으로 리다이렉트
   } else {
-    next()
+    if (to.path == '/home') {
+      next({ name: 'rooms' })
+    } else next()
   }
 })
 export default router

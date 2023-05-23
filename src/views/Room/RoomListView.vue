@@ -1,6 +1,9 @@
 <template>
   <div>
     <h3>방</h3>
+    <a-button shape="circle">
+      <template #icon><sync-outlined /></template>
+    </a-button>
     <div class="rooms-wrap">
       <div class="room">
         <h5>제목</h5>
