@@ -1,8 +1,8 @@
 <script setup lang="ts">
 import type { SelectProps } from 'ant-design-vue/lib/vc-select/Select'
-import { UserOutlined, EyeOutlined } from '@ant-design/icons-vue'
+import { UserOutlined, EyeOutlined, LockOutlined } from '@ant-design/icons-vue'
 import { ref } from 'vue'
-
+const emit = defineEmits(['close-modal'])
 const props = defineProps<{
   visible: boolean
 }>()
@@ -11,6 +11,7 @@ const participantCount = ref(5)
 const checkPublicRoom = ref(true)
 const subjects = ['K-POP', 'J-POP', '게임', '영화', '만화']
 const selectedSubject = ref('')
+const inputPassword = ref('')
 const SelectParticipantCountOptions = ref<SelectProps['options']>([
   {
     value: 5,
@@ -41,7 +42,8 @@ const SelectParticipantCountOptions = ref<SelectProps['options']>([
 const onSelectedSubject = (subject: string) => {
   selectedSubject.value = subject
 }
-const emit = defineEmits(['close-modal'])
+
+const onClickCreateBtn = () => {}
 </script>
 
 <template>
@@ -53,7 +55,7 @@ const emit = defineEmits(['close-modal'])
     class="modal-room-create"
   >
     <div class="flex w-full gap-5">
-      <div class="w-1/3 bg-white p-10 rounded-xl">
+      <div class="w-1/3 h-48 bg-white p-10 rounded-xl">
         <h3 class="text-2xl font-bold mb-8">구성</h3>
         <ul class="flex gap-6 flex-col">
           <li class="flex justify-between items-center">
@@ -75,6 +77,12 @@ const emit = defineEmits(['close-modal'])
               <h3 class="text-2xl">공개 여부</h3>
             </div>
             <a-switch v-model:checked="checkPublicRoom" size="large"></a-switch>
+          </li>
+          <li v-show="!checkPublicRoom" class="flex justify-between items-center">
+            <div class="flex">
+              <lock-outlined class="text-3xl mr-3" />
+              <a-input v-model:value="inputPassword" placeholder="비밀번호" />
+            </div>
           </li>
         </ul>
       </div>

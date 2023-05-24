@@ -12,6 +12,7 @@ declare module '@vue/runtime-core' {
     AboutView: typeof import('./src/views/AboutView.vue')['default']
     AButton: typeof import('ant-design-vue/es')['Button']
     ADivider: typeof import('ant-design-vue/es')['Divider']
+    AInput: typeof import('ant-design-vue/es')['Input']
     AInputSearch: typeof import('ant-design-vue/es')['InputSearch']
     AModal: typeof import('ant-design-vue/es')['Modal']
     App: typeof import('./src/App.vue')['default']
