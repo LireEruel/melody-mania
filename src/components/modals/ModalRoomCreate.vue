@@ -9,6 +9,8 @@ const props = defineProps<{
 
 const participantCount = ref(5)
 const checkPublicRoom = ref(true)
+const subjects = ['K-POP', 'J-POP', '게임', '영화', '만화']
+const selectedSubject = ref('')
 const SelectParticipantCountOptions = ref<SelectProps['options']>([
   {
     value: 5,
@@ -36,8 +38,10 @@ const SelectParticipantCountOptions = ref<SelectProps['options']>([
   }
 ])
 
+const onSelectedSubject = (subject: string) => {
+  selectedSubject.value = subject
+}
 const emit = defineEmits(['close-modal'])
-const subjects = ['K-POP', 'J-POP', '게임', '영화', '만화']
 </script>
 
 <template>
@@ -80,7 +84,9 @@ const subjects = ['K-POP', 'J-POP', '게임', '영화', '만화']
           <li
             v-for="subject in subjects"
             :key="subject"
-            class="flex items-center justify-center text-center w-auto bg-white p-5 rounded-xl border-3 border-solid hover:border-blue-500 cursor-pointer mr-3"
+            class="flex items-center justify-center text-center w-auto bg-white p-5 rounded-xl border-4 border-solid border-white hover:border-blue-200 cursor-pointer mr-3"
+            :class="{ selected: subject == selectedSubject }"
+            @click="() => onSelectedSubject(subject)"
           >
             {{ subject }}
           </li>
@@ -95,6 +101,9 @@ const subjects = ['K-POP', 'J-POP', '게임', '영화', '만화']
   .ant-modal-body {
     background-color: #f0f0f0;
     min-height: 40vh;
+  }
+  .selected {
+    border-color: #1890ff;
   }
 }
 </style>
