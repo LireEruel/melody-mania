@@ -4,6 +4,15 @@ import { ref } from 'vue'
 const searchValue = ref<string>('')
 
 const onSearch = () => {}
+const createRoomModalVisible = ref(false)
+
+const onOpenCreateRoomModal = () => {
+  createRoomModalVisible.value = true
+}
+
+const onCloseCreateRoomModal = () => {
+  createRoomModalVisible.value = false
+}
 </script>
 
 <template>
@@ -34,9 +43,15 @@ const onSearch = () => {}
         </div>
       </div>
       <div>
-        <a-button type="primary" size="large" class="mr-10"> Create </a-button>
+        <a-button @click="onOpenCreateRoomModal" type="primary" size="large" class="mr-10">
+          Create
+        </a-button>
         <a-button size="large"> 입장 </a-button>
       </div>
     </div>
+    <modal-room-create
+      :visible="createRoomModalVisible"
+      @close-modal="onCloseCreateRoomModal"
+    ></modal-room-create>
   </div>
 </template>
