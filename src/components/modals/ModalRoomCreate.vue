@@ -3,6 +3,7 @@ import type { SelectProps } from 'ant-design-vue/lib/vc-select/Select'
 import { UserOutlined, EyeOutlined, LockOutlined } from '@ant-design/icons-vue'
 import { ref } from 'vue'
 import { createRoom } from '@/api/room/room'
+import Swal from 'sweetalert2'
 const emit = defineEmits(['close-modal'])
 const props = defineProps<{
   visible: boolean
@@ -52,13 +53,42 @@ const onClickCreateBtn = () => {
     selectedSubject.value,
     inputPassword.value
   )
-  const res = createRoom(
-    participantCount.value,
-    checkPublicRoom.value,
-    selectedSubject.value,
-    inputPassword.value
-  )
-  console.log(res)
+  if (selectedSubject.value.length < 1) {
+    Swal.fire({
+      title: 'Error!',
+      text: '주제를 확인해주세요',
+      icon: 'error',
+      confirmButtonText: '확인',
+      heightAuto: false
+    })
+  } else {
+    try {
+      const res = createRoom(
+        participantCount.value,
+        checkPublicRoom.value,
+        selectedSubject.value,
+        inputPassword.value
+      )
+      console.log(res)
+      Swal.fire({
+        title: 'Success',
+        text: '새로운 방이 생성되었습니다.',
+        icon: 'success',
+        confirmButtonText: '확인',
+        heightAuto: false
+      }).then(() => {
+        window.location.replace('/room')
+      })
+    } catch {
+      Swal.fire({
+        title: 'Error!',
+        text: '방 생성에 실패하였습니다.',
+        icon: 'error',
+        confirmButtonText: '확인',
+        heightAuto: false
+      })
+    }
+  }
 }
 </script>
 
