@@ -2,6 +2,7 @@
 import type { SelectProps } from 'ant-design-vue/lib/vc-select/Select'
 import { UserOutlined, EyeOutlined, LockOutlined } from '@ant-design/icons-vue'
 import { ref } from 'vue'
+import { createRoom } from '@/api/room/room'
 const emit = defineEmits(['close-modal'])
 const props = defineProps<{
   visible: boolean
@@ -43,19 +44,35 @@ const onSelectedSubject = (subject: string) => {
   selectedSubject.value = subject
 }
 
-const onClickCreateBtn = () => {}
+const onClickCreateBtn = () => {
+  console.log('create btn clicked')
+  console.log(
+    participantCount.value,
+    checkPublicRoom.value,
+    selectedSubject.value,
+    inputPassword.value
+  )
+  const res = createRoom(
+    participantCount.value,
+    checkPublicRoom.value,
+    selectedSubject.value,
+    inputPassword.value
+  )
+  console.log(res)
+}
 </script>
 
 <template>
   <a-modal
     :visible="props.visible"
     title="새로운 방 설정"
+    @ok="onClickCreateBtn"
     @cancel="emit('close-modal')"
     width="1000px"
     class="modal-room-create"
   >
     <div class="flex w-full gap-5">
-      <div class="w-1/3 h-48 bg-white p-10 rounded-xl">
+      <div class="w-1/3 h-80 bg-white p-10 rounded-xl">
         <h3 class="text-2xl font-bold mb-8">구성</h3>
         <ul class="flex gap-6 flex-col">
           <li class="flex justify-between items-center">
