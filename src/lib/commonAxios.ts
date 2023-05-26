@@ -21,7 +21,7 @@ commonAxios.interceptors.request.use(function (
 
 commonAxios.interceptors.response.use(
   function (response) {
-    return response
+    return response.data
   },
   function (error) {
     console.error(error)

@@ -1,10 +1,10 @@
 import type { User } from './user'
 
 export interface Room {
-  room_id: string
+  _id: string
   subject: string
   is_public: boolean
-  participant_count: number
+  participants_count: number
   password: string
   participants_list: Array<User>
 }

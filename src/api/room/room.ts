@@ -1,10 +1,15 @@
 import axios from '@/lib/commonAxios'
-import type { RoomCreateInfo } from '@/types/room'
+import { type Room, type RoomCreateInfo } from '@/types/room'
 import { useUserStore } from '@/stores/user'
 import type { AxiosRequestConfig } from 'axios'
 //const server = 'http://vdophgzesl.us14.qoddiapp.com'
 
 const server = 'http://localhost:8000'
+
+async function getRooms(): Promise<undefined | Room[]> {
+  const res = await axios.get(`${server}/room`)
+  return res.data
+}
 
 async function createRoom(
   participants: number,
@@ -28,4 +33,4 @@ async function createRoom(
   return res.data
 }
 
-export { createRoom }
+export { getRooms, createRoom }
