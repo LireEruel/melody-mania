@@ -33,4 +33,17 @@ async function createRoom(
   return res.data
 }
 
-export { getRooms, createRoom }
+async function joinRoom(room_id: string) {
+  const userStore = useUserStore()
+
+  const headers: AxiosRequestConfig['headers'] = {
+    'Content-Type': 'application/json',
+    Authorization: 'Bearer ' + userStore.user_info?.access_token
+  }
+  const params = { room_id: room_id }
+
+  const res = await axios.post(`${server}/room/join`, params, { headers })
+  return res.data
+}
+
+export { getRooms, createRoom, joinRoom }

@@ -1,7 +1,8 @@
 <script lang="ts" setup>
-import { getRooms } from '@/api/room/room'
+import { getRooms, joinRoom } from '@/api/room/room'
 import type { Room } from '@/types/room'
 import { SyncOutlined, TeamOutlined } from '@ant-design/icons-vue'
+import Swal from 'sweetalert2'
 import { onMounted, ref } from 'vue'
 const searchValue = ref<string>('')
 
@@ -22,6 +23,38 @@ const onCloseCreateRoomModal = () => {
   create_room_modal_visible.value = false
 }
 
+const onClickedEnterBtn = () => {
+  Swal.fire({
+    title: 'Fetching Data',
+    text: 'Wait',
+    allowOutsideClick: false,
+    showCancelButton: true,
+    showConfirmButton: false,
+    heightAuto: false,
+    didOpen: async () => {
+      try {
+        console.log(selected_room_id.value)
+        const response = await joinRoom(selected_room_id.value)
+
+        // 결과 도착, SweetAlert2 텍스트 업데이트
+        Swal.update({
+          title: 'Fetching Data',
+          text: 'Success'
+        })
+        Swal.close()
+        window.location.replace('/room')
+        console.log(response) // 결과 처리 로직
+      } catch (error) {
+        console.error('Error:', error)
+        Swal.update({
+          title: 'Fetching Data',
+          text: 'Error occurred'
+        })
+      }
+    }
+  })
+}
+
 const onSelectedRoom = (room_id: string) => {
   if (selected_room_id.value == room_id) {
     selected_room_id.value = ''
@@ -36,6 +69,7 @@ const loadingRooms = async () => {
     const res = await getRooms()
     if (res) {
       room_list.value = res
+      console.log(res)
     }
   } catch (e) {
     console.error(e)
@@ -93,7 +127,12 @@ const loadingRooms = async () => {
         >
           Create
         </a-button>
-        <a-button size="large" type="primary" :disabled="!selected_room_id.length">
+        <a-button
+          size="large"
+          type="primary"
+          :disabled="!selected_room_id.length"
+          @click="onClickedEnterBtn"
+        >
           Enter
         </a-button>
       </div>
