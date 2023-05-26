@@ -7,4 +7,16 @@ body,
 #app {
   height: 100%;
   padding-right: 0px !important;
+
+  .selected-border {
+    border-color: #1890ff !important;
+  }
+
+  .green-btn {
+    background-color: #52c41a !important;
+    border-color: #52c41a !important;
+  }
+  .green-btn:hover {
+    background-color: #73d13d !important;
+  }
 }

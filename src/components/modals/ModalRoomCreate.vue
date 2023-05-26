@@ -140,7 +140,7 @@ const onClickCreateBtn = () => {
             v-for="subject in subjects"
             :key="subject"
             class="flex items-center justify-center text-center w-auto bg-white p-5 rounded-xl border-4 border-solid border-white hover:border-blue-200 cursor-pointer mr-3"
-            :class="{ selected: subject == selectedSubject }"
+            :class="{ 'selected-border': subject == selectedSubject }"
             @click="() => onSelectedSubject(subject)"
           >
             {{ subject }}
@@ -156,9 +156,6 @@ const onClickCreateBtn = () => {
   .ant-modal-body {
     background-color: #f0f0f0;
     min-height: 40vh;
-  }
-  .selected {
-    border-color: #1890ff;
   }
 }
 </style>

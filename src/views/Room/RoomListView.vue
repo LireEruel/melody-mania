@@ -7,24 +7,32 @@ const searchValue = ref<string>('')
 
 const onSearch = () => {}
 const room_list = ref([] as Array<Room>)
-const createRoomModalVisible = ref(false)
-const onLoadingRooms = ref(false)
-
+const create_room_modal_visible = ref(false)
+const on_loading_rooms = ref(false)
+const selected_room_id = ref('')
 onMounted(async () => {
   await loadingRooms()
 })
 
 const onOpenCreateRoomModal = () => {
-  createRoomModalVisible.value = true
+  create_room_modal_visible.value = true
 }
 
 const onCloseCreateRoomModal = () => {
-  createRoomModalVisible.value = false
+  create_room_modal_visible.value = false
+}
+
+const onSelectedRoom = (room_id: string) => {
+  if (selected_room_id.value == room_id) {
+    selected_room_id.value = ''
+  } else {
+    selected_room_id.value = room_id
+  }
 }
 
 const loadingRooms = async () => {
   try {
-    onLoadingRooms.value = true
+    on_loading_rooms.value = true
     const res = await getRooms()
     if (res) {
       room_list.value = res
@@ -32,7 +40,7 @@ const loadingRooms = async () => {
   } catch (e) {
     console.error(e)
   } finally {
-    onLoadingRooms.value = false
+    on_loading_rooms.value = false
   }
 }
 </script>
@@ -53,12 +61,18 @@ const loadingRooms = async () => {
           <template #icon><sync-outlined /></template>
         </a-button>
       </div>
-      <a-spin :spinning="onLoadingRooms">
+      <a-spin :spinning="on_loading_rooms">
         <div class="flex flex-wrap bg-gray-100 w-3/5 h-4/5 my-12 overflow-auto">
           <div
             v-for="room in room_list"
             :key="room._id"
-            class="flex flex-col justify-center items-center cursor-pointer bg-white h-48 px-6 pb-8 pt-10 mt-2 mr-0 mb-8 ml-10 shadow-xl ring-1 ring-gray-900/5 sm:max-w-sm sm:rounded-lg sm:px-10 border-2 border-solid hover:border-blue-500"
+            :class="{
+              'selected-border': room._id == selected_room_id,
+              'bg-sky-50': room._id == selected_room_id,
+              'bg-white': room._id !== selected_room_id
+            }"
+            @click="() => onSelectedRoom(room._id)"
+            class="flex flex-col justify-center items-center cursor-pointer h-48 px-6 pb-8 pt-10 mt-2 mr-0 mb-8 ml-10 shadow-xl ring-1 ring-gray-900/5 sm:max-w-sm sm:rounded-lg sm:px-10 border-2 border-solid hover:border-blue-300"
           >
             <h5 class="text-2xl">
               {{ room.subject }} <span>#{{ room._id.substring(0, 3) }}</span>
@@ -71,16 +85,21 @@ const loadingRooms = async () => {
         </div>
       </a-spin>
       <div>
-        <a-button @click="onOpenCreateRoomModal" type="primary" size="large" class="mr-10">
+        <a-button
+          @click="onOpenCreateRoomModal"
+          type="primary"
+          size="large"
+          class="mr-10 green-btn"
+        >
           Create
         </a-button>
-        <a-button size="large"> Enter </a-button>
+        <a-button size="large" type="primary" :disabled="!selected_room_id.length">
+          Enter
+        </a-button>
       </div>
     </div>
-    <modal-room-create
-      :visible="createRoomModalVisible"
-      @close-modal="onCloseCreateRoomModal"
-    ></modal-room-create>
+    <modal-room-create :visible="create_room_modal_visible" @close-modal="onCloseCreateRoomModal">
+    </modal-room-create>
   </div>
 </template>
 
