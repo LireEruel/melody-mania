@@ -91,7 +91,12 @@ const loadingRooms = async () => {
           @search="onSearch"
         />
 
-        <a-button shape="circle" class="ml-5">
+        <a-button
+          @click="loadingRooms"
+          :loading="on_loading_rooms"
+          shape="circle"
+          class="ml-5 mr-5"
+        >
           <template #icon><sync-outlined /></template>
         </a-button>
       </div>
@@ -119,13 +124,14 @@ const loadingRooms = async () => {
         </div>
       </a-spin>
       <div>
+        <a-button type="primary"> new problem </a-button>
         <a-button
           @click="onOpenCreateRoomModal"
           type="primary"
           size="large"
-          class="mr-10 green-btn"
+          class="ml-10 mr-10 green-btn"
         >
-          Create
+          Create Room
         </a-button>
         <a-button
           size="large"
