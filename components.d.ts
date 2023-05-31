@@ -19,6 +19,7 @@ declare module '@vue/runtime-core' {
     ASelect: typeof import('ant-design-vue/es')['Select']
     ASpin: typeof import('ant-design-vue/es')['Spin']
     ASwitch: typeof import('ant-design-vue/es')['Switch']
+    ATable: typeof import('ant-design-vue/es')['Table']
     HelloWorld: typeof import('./src/components/HelloWorld.vue')['default']
     HomeView: typeof import('./src/views/HomeView.vue')['default']
     IconCommunity: typeof import('./src/components/icons/IconCommunity.vue')['default']
@@ -27,12 +28,14 @@ declare module '@vue/runtime-core' {
     IconSupport: typeof import('./src/components/icons/IconSupport.vue')['default']
     IconTooling: typeof import('./src/components/icons/IconTooling.vue')['default']
     ModalRoomCreate: typeof import('./src/components/modals/ModalRoomCreate.vue')['default']
+    ProblemManageView: typeof import('./src/views/Problem/ProblemManageView.vue')['default']
     RoomListView: typeof import('./src/views/Room/RoomListView.vue')['default']
     RouterLink: typeof import('vue-router')['RouterLink']
     RouterView: typeof import('vue-router')['RouterView']
     SignInView: typeof import('./src/views/Auth/SignInView.vue')['default']
     SignUpView: typeof import('./src/views/Auth/SignUpView.vue')['default']
     TheWelcome: typeof import('./src/components/TheWelcome.vue')['default']
+    UploadWidget: typeof import('./src/components/UploadWidget.vue')['default']
     WelcomeItem: typeof import('./src/components/WelcomeItem.vue')['default']
   }
 }

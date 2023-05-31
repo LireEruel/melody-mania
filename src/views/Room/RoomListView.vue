@@ -77,6 +77,10 @@ const loadingRooms = async () => {
     on_loading_rooms.value = false
   }
 }
+
+const onClickedManageProblemsBtn = () => {
+  window.location.replace('/problems')
+}
 </script>
 
 <template>
@@ -124,7 +128,7 @@ const loadingRooms = async () => {
         </div>
       </a-spin>
       <div>
-        <a-button type="primary"> manage problem </a-button>
+        <a-button type="primary" @click="onClickedManageProblemsBtn"> manage problems </a-button>
         <a-button
           @click="onOpenCreateRoomModal"
           type="primary"
