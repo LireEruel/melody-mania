@@ -30,6 +30,7 @@
     "unplugin-vue-components": "^0.24.1",
     "vue": "^3.2.47",
     "vue-router": "^4.1.6",
+    "vuejs-progress-bar": "^1.2.8",
     "yarn": "^1.22.19"
   },
   "devDependencies": {
