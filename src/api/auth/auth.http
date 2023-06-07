@@ -1,5 +1,5 @@
 ###/login
-POST http://vdophgzesl.us14.qoddiapp.com/login
+POST http://vdophgzesl.us14.qoddiapp.com/login/
 
 {
     "email":"ab@11",
@@ -7,7 +7,7 @@ POST http://vdophgzesl.us14.qoddiapp.com/login
 }
 
 ###/login
-POST http://127.0.0.1:8080/login
+POST http://127.0.0.1:8000/login/
 
 {
     "email":"ab@11",
