@@ -1,13 +1,11 @@
 <script setup lang="ts">
 import secrets from '@/secrets'
 import { ref } from 'vue'
-
 const emit = defineEmits(['close-modal'])
 const props = defineProps<{
   visible: boolean
 }>()
 const isMultipleChoice = ref(false)
-const fileList = ref([])
 const cloudName = secrets.cloudinary.cloudName
 const uploadPreset = secrets.cloudinary.uploadPreset
 
@@ -29,27 +27,23 @@ const musicTableColumns = [
   }
 ]
 
-interface FileItem {
-  uid: string
-  name?: string
-  status?: string
-  response?: string
-  url?: string
-}
+const myWidget = cloudinary.createUploadWidget(
+  {
+    cloudName: cloudName,
+    uploadPreset: uploadPreset
+  },
+  (error: any, result: any) => {
+    if (!error && result && result.event === 'success') {
+      console.log('Done! Here is the image info: ', result.info)
+      //   document
+      //     .getElementById("uploadedimage")
+      //     .setAttribute("src", result.info.secure_url);
+    }
+  }
+)
 
-interface FileInfo {
-  file: FileItem
-  fileList: FileItem[]
-}
-const handleChange = (info: FileInfo) => {
-  if (info.file.status !== 'uploading') {
-    console.log(info.file, info.fileList)
-  }
-  if (info.file.status === 'done') {
-    console.log(`${info.file.name} file uploaded successfully`)
-  } else if (info.file.status === 'error') {
-    console.log(`${info.file.name} file upload failed.`)
-  }
+const open = () => {
+  myWidget.open()
 }
 </script>
 
@@ -67,7 +61,8 @@ const handleChange = (info: FileInfo) => {
     </div>
     <div>
       <p>음악 선택</p>
-      <a-upload
+      <button v-on:click="open" id="upload_widget" class="cloudinary-button">Upload files</button>
+      <!-- <a-upload
         v-model:file-list="fileList"
         name="file"
         :multiple="true"
@@ -78,7 +73,7 @@ const handleChange = (info: FileInfo) => {
           <upload-outlined></upload-outlined>
           Click to Upload
         </a-button>
-      </a-upload>
+      </a-upload> -->
       <a-table :columns="musicTableColumns"> </a-table>
     </div>
   </a-modal>
