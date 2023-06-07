@@ -4,6 +4,7 @@ import { UserOutlined, EyeOutlined, LockOutlined } from '@ant-design/icons-vue'
 import { ref } from 'vue'
 import { createRoom } from '@/api/room/room'
 import Swal from 'sweetalert2'
+import g from '@/global'
 const emit = defineEmits(['close-modal'])
 const props = defineProps<{
   visible: boolean
@@ -11,7 +12,7 @@ const props = defineProps<{
 
 const participantCount = ref(5)
 const checkPublicRoom = ref(true)
-const subjects = ['K-POP', 'J-POP', '게임', '영화', '만화']
+const subjects = g.SUBJECTS
 const selectedSubject = ref('')
 const inputPassword = ref('')
 const SelectParticipantCountOptions = ref<SelectProps['options']>([

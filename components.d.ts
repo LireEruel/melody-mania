@@ -11,7 +11,6 @@ declare module '@vue/runtime-core' {
   export interface GlobalComponents {
     AboutView: typeof import('./src/views/AboutView.vue')['default']
     AButton: typeof import('ant-design-vue/es')['Button']
-    ADivider: typeof import('ant-design-vue/es')['Divider']
     AInput: typeof import('ant-design-vue/es')['Input']
     AInputSearch: typeof import('ant-design-vue/es')['InputSearch']
     AModal: typeof import('ant-design-vue/es')['Modal']
@@ -20,6 +19,7 @@ declare module '@vue/runtime-core' {
     ASpin: typeof import('ant-design-vue/es')['Spin']
     ASwitch: typeof import('ant-design-vue/es')['Switch']
     ATable: typeof import('ant-design-vue/es')['Table']
+    AUpload: typeof import('ant-design-vue/es')['Upload']
     HelloWorld: typeof import('./src/components/HelloWorld.vue')['default']
     HomeView: typeof import('./src/views/HomeView.vue')['default']
     IconCommunity: typeof import('./src/components/icons/IconCommunity.vue')['default']
@@ -27,6 +27,7 @@ declare module '@vue/runtime-core' {
     IconEcosystem: typeof import('./src/components/icons/IconEcosystem.vue')['default']
     IconSupport: typeof import('./src/components/icons/IconSupport.vue')['default']
     IconTooling: typeof import('./src/components/icons/IconTooling.vue')['default']
+    ModalProblemCreate: typeof import('./src/components/modals/ModalProblemCreate.vue')['default']
     ModalRoomCreate: typeof import('./src/components/modals/ModalRoomCreate.vue')['default']
     ProblemManageView: typeof import('./src/views/Problem/ProblemManageView.vue')['default']
     RoomListView: typeof import('./src/views/Room/RoomListView.vue')['default']
@@ -35,7 +36,6 @@ declare module '@vue/runtime-core' {
     SignInView: typeof import('./src/views/Auth/SignInView.vue')['default']
     SignUpView: typeof import('./src/views/Auth/SignUpView.vue')['default']
     TheWelcome: typeof import('./src/components/TheWelcome.vue')['default']
-    UploadWidget: typeof import('./src/components/UploadWidget.vue')['default']
     WelcomeItem: typeof import('./src/components/WelcomeItem.vue')['default']
   }
 }
