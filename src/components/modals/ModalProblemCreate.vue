@@ -1,13 +1,11 @@
 <script setup lang="ts">
-import secrets from '@/secrets'
 import { ref } from 'vue'
 const emit = defineEmits(['close-modal'])
 const props = defineProps<{
   visible: boolean
 }>()
 const isMultipleChoice = ref(false)
-const cloudName = secrets.cloudinary.cloudName
-const uploadPreset = secrets.cloudinary.uploadPreset
+const musicAddModalVisible = ref(false)
 
 const musicTableColumns = [
   {
@@ -27,23 +25,8 @@ const musicTableColumns = [
   }
 ]
 
-const myWidget = cloudinary.createUploadWidget(
-  {
-    cloudName: cloudName,
-    uploadPreset: uploadPreset
-  },
-  (error: any, result: any) => {
-    if (!error && result && result.event === 'success') {
-      console.log('Done! Here is the image info: ', result.info)
-      //   document
-      //     .getElementById("uploadedimage")
-      //     .setAttribute("src", result.info.secure_url);
-    }
-  }
-)
-
-const open = () => {
-  myWidget.open()
+const openAddMusicModal = () => {
+  musicAddModalVisible.value = true
 }
 </script>
 
@@ -61,20 +44,9 @@ const open = () => {
     </div>
     <div>
       <p>음악 선택</p>
-      <button v-on:click="open" id="upload_widget" class="cloudinary-button">Upload files</button>
-      <!-- <a-upload
-        v-model:file-list="fileList"
-        name="file"
-        :multiple="true"
-        action="https://www.mocky.io/v2/5cc8019d300000980a055e76"
-        @change="handleChange"
-      >
-        <a-button>
-          <upload-outlined></upload-outlined>
-          Click to Upload
-        </a-button>
-      </a-upload> -->
+      <a-button @click="openAddMusicModal">음악 추가</a-button>
       <a-table :columns="musicTableColumns"> </a-table>
     </div>
   </a-modal>
+  <modal-music-add :visible="musicAddModalVisible"></modal-music-add>
 </template>
