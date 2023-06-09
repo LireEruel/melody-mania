@@ -23,7 +23,7 @@ async function addMusic(name: string, url: string, singer: string, tags: string[
   return res.data
 }
 
-async function getMusicList(): Promise<undefined | Music[]> {
+async function getMusicList(): Promise<Array<Music>> {
   const res = await axios.get(`${server}/music`)
   return res.data
 }

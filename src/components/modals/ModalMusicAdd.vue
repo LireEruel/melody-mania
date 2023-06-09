@@ -2,7 +2,7 @@
 import { addMusic } from '@/api/music/api'
 import secrets from '@/secrets'
 import { ref } from 'vue'
-const emit = defineEmits(['close-modal'])
+const emit = defineEmits(['close-modal', 'uploaded-music'])
 const props = defineProps<{
   visible: boolean
 }>()
@@ -34,6 +34,7 @@ const myWidget = cloudinary.createUploadWidget(
         formState.value.tags
       )
       myWidget.close({ quiet: true })
+      emit('uploaded-music')
       emit('close-modal')
     }
   }
