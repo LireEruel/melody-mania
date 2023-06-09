@@ -14,7 +14,7 @@ async function addMusic(name: string, url: string, singer: string, tags: string[
     Authorization: 'Bearer ' + userStore.user_info?.access_token
   }
   const params = {} as Music
-  params.musicName = name
+  params.music_name = name
   params.singer = singer
   params.play_url = url
   params.tags = tags

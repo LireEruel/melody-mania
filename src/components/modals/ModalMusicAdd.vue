@@ -8,7 +8,11 @@ const props = defineProps<{
 }>()
 const cloudName = secrets.cloudinary.cloudName
 const uploadPreset = secrets.cloudinary.uploadPreset
-
+interface FormState {
+  musicName: string
+  singer: string
+  tags: Array<string>
+}
 const formState = ref<FormState>({
   musicName: '',
   singer: '',
@@ -29,9 +33,8 @@ const myWidget = cloudinary.createUploadWidget(
         formState.value.singer,
         formState.value.tags
       )
-      //   document
-      //     .getElementById("uploadedimage")
-      //     .setAttribute("src", result.info.secure_url);
+      myWidget.close({ quiet: true })
+      emit('close-modal')
     }
   }
 )
@@ -39,19 +42,14 @@ const myWidget = cloudinary.createUploadWidget(
 const open = () => {
   myWidget.open()
 }
-
-interface FormState {
-  musicName: string
-  singer: string
-  tags: Array<string>
-}
 </script>
 
 <template>
   <a-modal
     :visible="props.visible"
-    title="문제 출제"
+    title="음악 추가"
     @cancel="emit('close-modal')"
+    @ok="open"
     width="1000px"
     class="modal-room-create"
   >
@@ -78,18 +76,17 @@ interface FormState {
         >
           <a-input v-model:value="formState.singer" />
         </a-form-item>
-
-        <a-form-item :wrapper-col="{ offset: 8, span: 16 }">
-          <a-button
-            :disabled="formState.musicName === ''"
-            v-on:click="open"
-            type="primary"
-            id="upload_widget"
-            class="cloudinary-button"
-            >Upload files</a-button
-          >
-        </a-form-item>
       </a-form>
     </div>
+    <template #footer>
+      <a-button
+        :disabled="formState.musicName === ''"
+        v-on:click="open"
+        type="primary"
+        id="upload_widget"
+        class="cloudinary-button"
+        >Upload files</a-button
+      >
+    </template>
   </a-modal>
 </template>

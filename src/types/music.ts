@@ -1,6 +1,6 @@
 export interface Music {
   _id: string
-  musicName: string
+  music_name: string
   singer: string
   tags: undefined | Array<string>
   play_url: string

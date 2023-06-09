@@ -28,6 +28,10 @@ const musicTableColumns = [
 const openAddMusicModal = () => {
   musicAddModalVisible.value = true
 }
+
+const closeModalMusicAdd = () => {
+  musicAddModalVisible.value = false
+}
 </script>
 
 <template>
@@ -48,5 +52,8 @@ const openAddMusicModal = () => {
       <a-table :columns="musicTableColumns"> </a-table>
     </div>
   </a-modal>
-  <modal-music-add :visible="musicAddModalVisible"></modal-music-add>
+  <modal-music-add
+    :visible="musicAddModalVisible"
+    @close-modal="closeModalMusicAdd"
+  ></modal-music-add>
 </template>
