@@ -21,14 +21,16 @@ const openCreateProblemModal = () => {
   <ModalProblemCreateVue :visible="createProblemModalVisible" />
 </template>
 
-<style>
-.ant-spin-nested-loading {
-  width: 100%;
-  height: 70%;
-}
-.ant-spin-container {
-  display: flex;
-  justify-content: center;
-  height: 100%;
+<style lang="scss">
+#problemManageView {
+  .ant-spin-nested-loading {
+    width: 100%;
+    height: 70%;
+  }
+  .ant-spin-container {
+    display: flex;
+    justify-content: center;
+    height: 100%;
+  }
 }
 </style>

@@ -84,7 +84,7 @@ const onClickedManageProblemsBtn = () => {
 </script>
 
 <template>
-  <div class="flex justify-center items-center w-screen h-full">
+  <div id="roomListView" class="flex justify-center items-center w-screen h-full">
     <div class="flex flex-col items-center justify-center w-4/5 h-full">
       <h3 class="text-center text-6xl font-bold text-gray-800">Melody Mania</h3>
       <div class="flex">
@@ -152,14 +152,16 @@ const onClickedManageProblemsBtn = () => {
   </div>
 </template>
 
-<style>
-.ant-spin-nested-loading {
-  width: 100%;
-  height: 70%;
-}
-.ant-spin-container {
-  display: flex;
-  justify-content: center;
-  height: 100%;
+<style lang="scss">
+#roomListView {
+  .ant-spin-nested-loading {
+    width: 100%;
+    height: 70%;
+  }
+  .ant-spin-container {
+    display: flex;
+    justify-content: center;
+    height: 100%;
+  }
 }
 </style>

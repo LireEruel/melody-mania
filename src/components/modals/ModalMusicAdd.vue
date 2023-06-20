@@ -51,7 +51,6 @@ const open = () => {
     title="음악 추가"
     @cancel="emit('close-modal')"
     @ok="open"
-    width="1000px"
     class="modal-room-create"
   >
     <div>
